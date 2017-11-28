@@ -5,13 +5,13 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     # return HTML
-    # return "<h1>this is the index page!<h1>"
+    # return "<h1>this is the home page!<h1>"
     return render_template('home-base.html')
 
 
 @app.route('/members')
 def show_all_members():
-    # return "<h2>this is the page for all users</h2>"
+    # return "<h2>this is the page for all members</h2>"
     return render_template('member-all.html')
 
 
