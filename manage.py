@@ -8,7 +8,7 @@ manager = Manager(app)
 def deploy():
     db.drop_all()
     db.create_all()
-    horror= Genre(name="Horror", description="Horror Films are unsettling films designed to frighten and panic, cause dread and alarm, and to invoke our hidden worst fears, often in a terrifying, shocking finale, while captivating and entertaining us at the same time in a cathartic experience.")
+    horror=Genre(name="Horror", description="Horror Films are unsettling films designed to frighten and panic, cause dread and alarm, and to invoke our hidden worst fears, often in a terrifying, shocking finale, while captivating and entertaining us at the same time in a cathartic experience.")
     action=Genre(name="Action", description="Action film is a genre in which the protagonist or protagonists end up in a series of challenges that typically include violence, extended fighting, physical feats, and frantic chases.")
     romantic=Genre(name="Romantic", description="Romance films or romance movies are romantic love stories recorded in visual media for broadcast in theaters and on TV that focus on passion, emotion, and the affectionate romantic involvement of the main characters and the journey that their genuinely strong, true and pure romantic love takes them through dating, courtship or marriage.")
     split=Movie(name="Split", director="M. Night Shyamalan", actors="James McAvoy, Anya Taylor-Joy, Betty Buckley, Haley Lu Richardson", description="Split is a 2016 American psychological horror-thriller film written and directed by M. Night Shyamalan and starring James McAvoy, Anya Taylor-Joy, and Betty Buckley. The film follows a man with 23 different personalities who kidnaps and imprisons three teenage girls in an isolated underground facility.", genre=horror)

@@ -1,0 +1,39 @@
+{% extends "home-base.html"%}
+{% block title %}All Genres{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-smile-o" aria-hidden="true"></i> Genres:</h1>
+    <div class="row bottom-margin">
+      <a href="/genre/add" class="btn btn-primary" role="button" aria-disabled="true">Add Genre</a>
+    </div>
+    {% if genres %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for genre in genres %}
+          <tr>
+              <th scope="row">{{genre.id}}</th>
+              <td>{{genre.name}}</td>
+              <td>{{genre.description}}</td>
+              <td>
+                <a href="/genre/edit/{{genre.id}}" class="btn btn-success" role="button">Edit</a>
+                <a href="/genre/delete/{{genre.id}}" class="btn btn-danger" role="button">Delete</a>
+              </td>
+          </tr>
+          {% endfor%}
+        </tbody>
+      </table>
+    {% else %}
+      <h3>there are no genres in the database yet.</h3>
+    {% endif %}
+  </div>
+
+{% endblock%}
