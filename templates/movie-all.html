@@ -1,0 +1,45 @@
+{% extends "home-base.html"%}
+{% block title %}All Movies{% endblock %}
+{% block page_content%}
+
+<!-- Page Content -->
+<div class="container">
+  <h1 class="mt-5"><i class="fa fa-film" aria-hidden="true"></i> Movies:</h1>
+  <div class="row bottom-margin">
+    <a href="/movie/add" class="btn btn-primary" role="button" aria-disabled="true">Add Movie</a>
+  </div>
+  {% if movies %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Director</th>
+        <th>Actors</th>
+        <th>Description</th>
+        <th>Genre</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for movie in movies %}
+      <tr>
+        <th scope="row">{{movie.id}}</th>
+        <td>{{movie.name}}</td>
+        <td>{{movie.director}}</td>
+        <td>{{movie.actors}}</td>
+        <td>{{movie.description}}</td>
+        <td>{{movie.genre.name}}</td>
+        <td>
+        <a href="/movie/edit/{{movie.id}}" class="btn btn-success" role="button" aria-disabled="true">Edit</a>
+          <a href="/movie/delete/{{movie.id}}" class="btn btn-danger" role="button" aria-disabled="true">Delete</a>
+        </td>
+      </tr>
+
+      {% endfor%}
+    </tbody>
+  </table>
+  {% else %}
+  <h3>There are no movies in the database yet.</h3> {% endif %}
+</div>
+
+{% endblock%}
