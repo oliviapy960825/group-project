@@ -58,6 +58,18 @@ def edit_genre(id):
         db.session.commit()
         return redirect(url_for('show_all_genres'))
 
+@app.route('/genre/delete/<int:id>', methods=['GET', 'POST'])
+def delete_genre(id):
+    genre = Genre.query.filter_by(id=id).first()
+    if request.method == 'GET':
+        return render_template('genre-delete.html', genre=genre)
+    if request.method == 'POST':
+        db.session.delete(genre)
+        db.session.commit()
+        return redirect(url_for('show_all_genres'))
+
+
+
 @app.route('/movies')
 def show_all_movies():
     movies = Movie.query.all()
@@ -66,9 +78,9 @@ def show_all_movies():
 @app.route('/movie/edit/<int:id>', methods=['GET', 'POST'])
 def edit_movie(id):
     movie = Movie.query.filter_by(id=id).first()
-    genres = Genre.query.all()
+    genre = Genre.query.all()
     if request.method == 'GET':
-        return render_template('movie-edit.html', movie=movie, genres=genres)
+        return render_template('movie-edit.html', movie=movie, genre=genre)
     if request.method == 'POST':
         # update data based on the form data
         movie.name = request.form['name']
@@ -79,6 +91,17 @@ def edit_movie(id):
         genre = Genre.query.filter_by(name=genre_name).first()
         movie.genre = genre
         # update the database
+        db.session.commit()
+        return redirect(url_for('show_all_movies'))
+
+@app.route('/movie/delete/<int:id>', methods=['GET', 'POST'])
+def delete_movie(id):
+    movie = Movie.query.filter_by(id=id).first()
+    genre = Genre.query.all()
+    if request.method == 'GET':
+        return render_template('movie-delete.html', movie=movie, genre=genre)
+    if request.method == 'POST':
+        db.session.delete(movie)
         db.session.commit()
         return redirect(url_for('show_all_movies'))
 

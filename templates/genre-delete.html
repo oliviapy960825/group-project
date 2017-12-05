@@ -1,0 +1,21 @@
+{% extends "home-base.html"%}
+{% block title %}Delete Genre{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-film" aria-hidden="true"></i> Delete Genre:</h1>
+    <form action="/genre/delete/{{genre.id}}" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" value="{{genre.name}}" required="true" readonly="true">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" name="description" required="true" readonly="true">{{genre.description}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-danger" id="delete_btn">Delete</button>
+    </form>
+  </div>
+
+{% endblock%}

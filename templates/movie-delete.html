@@ -1,0 +1,34 @@
+
+{% extends "home-base.html"%}
+{% block title %}Delete Movie{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-film" aria-hidden="true"></i> Delete the following movie:</h1>
+    <form action="/movie/delete/{{movie.id}}" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" value="{{movie.name}}" required="true" readonly="true">
+      </div>
+      <div class="form-group">
+        <label>Director</label>
+        <input class="form-control" type="text" name="director" value="{{movie.director}}" readonly="true">
+      </div>
+      <div class="form-group">
+        <label>Actors</label>
+        <input class="form-control" type="text" name="actors" value="{{movie.actors}}" readonly="true">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" name="description" required="true" readonly="true">{{movie.description}}</textarea>
+      </div>
+      <div class="form-group">
+        <label>Genre</label>
+        <textarea class="form-control" name="genre" required="true" readonly="true">{{movie.genre.name}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-danger" id="delete_btn">Delete</button>
+    </form>
+  </div>
+
+{% endblock%}

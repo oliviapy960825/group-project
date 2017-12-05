@@ -28,13 +28,41 @@
         <td>{{movie.name}}</td>
         <td>{{movie.director}}</td>
         <td>{{movie.actors}}</td>
-        <td>{{movie.description}}</td>
+        <td>
+          <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{movie.id}}">
+    View Description
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="{{movie.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="{{movie.name}}"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
+                    <pre>{{movie.description}}</pre>
+                  </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</td>
         <td>{{movie.genre.name}}</td>
         <td>
         <a href="/movie/edit/{{movie.id}}" class="btn btn-success" role="button" aria-disabled="true">Edit</a>
           <a href="/movie/delete/{{movie.id}}" class="btn btn-danger" role="button" aria-disabled="true">Delete</a>
         </td>
-      </tr>
+</tr>
+
 
       {% endfor%}
     </tbody>
