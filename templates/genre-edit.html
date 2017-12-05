@@ -1,0 +1,21 @@
+{% extends "home-base.html"%}
+{% block title %}Edit Genre{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-video-camera" aria-hidden="true"></i> Edit Genre:</h1>
+    <form action="/genre/edit/{{genre.id}}" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" value="{{genre.name}}" required="true">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" name="description" required="true">{{genre.description}}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+  </div>
+
+{% endblock%}

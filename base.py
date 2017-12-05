@@ -45,10 +45,42 @@ def show_all_genres():
     genres = Genre.query.all()
     return render_template('genre-all.html', genres=genres)
 
+@app.route('/genre/edit/<int:id>', methods=['GET', 'POST'])
+def edit_genre(id):
+    genre = Genre.query.filter_by(id=id).first()
+    if request.method == 'GET':
+        return render_template('genre-edit.html', genre=genre)
+    if request.method == 'POST':
+        # update data based on the form data
+        genre.name = request.form['name']
+        genre.description = request.form['description']
+        # update the database
+        db.session.commit()
+        return redirect(url_for('show_all_genres'))
+
 @app.route('/movies')
 def show_all_movies():
     movies = Movie.query.all()
     return render_template('movie-all.html', movies=movies)
+
+@app.route('/movie/edit/<int:id>', methods=['GET', 'POST'])
+def edit_movie(id):
+    movie = Movie.query.filter_by(id=id).first()
+    genres = Genre.query.all()
+    if request.method == 'GET':
+        return render_template('movie-edit.html', movie=movie, genres=genres)
+    if request.method == 'POST':
+        # update data based on the form data
+        movie.name = request.form['name']
+        movie.director = request.form['director']
+        movie.actors = request.form['actors']
+        movie.description = request.form['description']
+        genre_name = request.form['genre']
+        genre = Genre.query.filter_by(name=genre_name).first()
+        movie.genre = genre
+        # update the database
+        db.session.commit()
+        return redirect(url_for('show_all_movies'))
 
 # https://goo.gl/Pc39w8 explains the following line
 if __name__ == '__main__':
