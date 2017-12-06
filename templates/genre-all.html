@@ -23,7 +23,33 @@
           <tr>
               <th scope="row">{{genre.id}}</th>
               <td>{{genre.name}}</td>
-              <td>{{genre.description}}</td>
+              <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{genre.id}}">
+                  View Description
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="{{genre.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="{{genre.name}}"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="modal-body">
+                                  <p>{{genre.description}}</p>
+                                </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
               <td>
                 <a href="/genre/edit/{{genre.id}}" class="btn btn-success" role="button">Edit</a>
                 <a href="/genre/delete/{{genre.id}}" class="btn btn-danger" role="button">Delete</a>
