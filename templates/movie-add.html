@@ -1,0 +1,41 @@
+{% extends "home-base.html"%}
+{% block title %}Add Movie{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-film" aria-hidden="true"></i> Add Movie:</h1>
+    <form action="/movie/add" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" placeholder="Name of the Movie" required="true">
+      </div>
+      <div class="form-group">
+        <label>Director</label>
+        <input class="form-control" type="text" name="director" placeholder="Director Name" required="true">
+      </div>
+      <div class="form-group">
+        <label>Actors</label>
+        <textarea class="form-control" name="actors" placeholder="Actor Names" required="true"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" name="description" placeholder="Brief Description" required="true"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Genre</label>
+        <select class="form-control" name="genre">
+          {% for genre in genres %}
+              <option>{{genre.name}}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        Genre not in the list? <a href="/genre/add" class="btn btn-success" role="button" aria-disabled="true">Add Genres</a>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Add Movie</button>
+    </form>
+  </div>
+
+{% endblock%}

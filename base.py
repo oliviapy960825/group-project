@@ -28,6 +28,7 @@ class Genre(db.Model):
     description = db.Column(db.Text)
     movies = db.relationship('Movie', backref='genre',cascade="delete")##back reference at the many side, unique in ORM
 
+
 @app.route('/')
 def index():
     # return HTML
@@ -40,10 +41,28 @@ def show_all_members():
     # return "<h2>this is the page for all members</h2>"
     return render_template('member-all.html')
 
+
 @app.route('/genres')
 def show_all_genres():
     genres = Genre.query.all()
     return render_template('genre-all.html', genres=genres)
+
+
+@app.route('/genre/add', methods=['GET', 'POST'])
+def add_genre():
+    if request.method == 'GET':
+        return render_template('genre-add.html')
+    if request.method == 'POST':
+        # get data from the form
+        name = request.form['name']
+        description = request.form['description']
+
+        # insert the data into the database
+        genre = Genre(name=name, description=description)
+        db.session.add(genre)
+        db.session.commit()
+        return redirect(url_for('show_all_genres'))
+
 
 @app.route('/genre/edit/<int:id>', methods=['GET', 'POST'])
 def edit_genre(id):
@@ -58,6 +77,7 @@ def edit_genre(id):
         db.session.commit()
         return redirect(url_for('show_all_genres'))
 
+
 @app.route('/genre/delete/<int:id>', methods=['GET', 'POST'])
 def delete_genre(id):
     genre = Genre.query.filter_by(id=id).first()
@@ -69,18 +89,39 @@ def delete_genre(id):
         return redirect(url_for('show_all_genres'))
 
 
-
 @app.route('/movies')
 def show_all_movies():
     movies = Movie.query.all()
     return render_template('movie-all.html', movies=movies)
 
+
+@app.route('/movie/add', methods=['GET', 'POST'])
+def add_movies():
+    if request.method == 'GET':
+        genres = Genre.query.all()
+        return render_template('movie-add.html', genres=genres)
+    if request.method == 'POST':
+        # get data from the form
+        name = request.form['name']
+        director = request.form['director']
+        actors = request.form['actors']
+        description = request.form['description']
+        genre_name = request.form['genre']
+        genre = Genre.query.filter_by(name=genre_name).first()
+        movie = Movie(name=name, actors=actors, description=description, genre=genre)
+
+        # insert the data into the database
+        db.session.add(movie)
+        db.session.commit()
+        return redirect(url_for('show_all_movies'))
+
+
 @app.route('/movie/edit/<int:id>', methods=['GET', 'POST'])
 def edit_movie(id):
     movie = Movie.query.filter_by(id=id).first()
-    genre = Genre.query.all()
+    genres = Genre.query.all()
     if request.method == 'GET':
-        return render_template('movie-edit.html', movie=movie, genre=genre)
+        return render_template('movie-edit.html', movie=movie, genres=genres)
     if request.method == 'POST':
         # update data based on the form data
         movie.name = request.form['name']
@@ -94,6 +135,7 @@ def edit_movie(id):
         db.session.commit()
         return redirect(url_for('show_all_movies'))
 
+
 @app.route('/movie/delete/<int:id>', methods=['GET', 'POST'])
 def delete_movie(id):
     movie = Movie.query.filter_by(id=id).first()
@@ -104,6 +146,7 @@ def delete_movie(id):
         db.session.delete(movie)
         db.session.commit()
         return redirect(url_for('show_all_movies'))
+
 
 # https://goo.gl/Pc39w8 explains the following line
 if __name__ == '__main__':

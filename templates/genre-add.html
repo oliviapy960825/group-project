@@ -1,0 +1,21 @@
+{% extends "home-base.html"%}
+{% block title %}Add Genre{% endblock %}
+{% block page_content%}
+
+  <!-- Page Content -->
+  <div class="container">
+    <h1 class="mt-5"><i class="fa fa-smile-o" aria-hidden="true"></i> Add Genre:</h1>
+    <form action="/genre/add" method="post" id="add-genre-form">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" placeholder="Name of the Genre" required="true">
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" name="description" placeholder="Brief description of the genre" required="true"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Genre</button>
+    </form>
+  </div>
+
+{% endblock%}
