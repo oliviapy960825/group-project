@@ -19,3 +19,15 @@
   </div>
 
 {% endblock%}
+{% block scripts%}
+  {{super()}}
+  <script>
+  $(document).ready(function () {
+    $('#delete_btn').click(function () {
+      if (! confirm('All related genres will be deleted too!! Are you sure?')) {
+        return false;
+      }
+    })
+  });
+  </script>
+{% endblock%}
